@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.dousiwei.springbootdayang.mapper.CommonUMapper">
+    <insert id="scenic_reviews" parameterType="com.dousiwei.springbootdayang.pojo.eneity.ScenicReview">
+        insert into dayang_tourism.scenic_reviews (scenic_id, user_id, rating, comment, review_date)
+        values (#{scenicId},#{userId},#{rating},#{comment},#{reviewDate})
+    </insert>
+
+    <insert id="addHotel" parameterType="com.dousiwei.springbootdayang.pojo.eneity.HotelReservation">
+        insert into dayang_tourism.hotel_reservations (user_id, hotel_id, room_id, check_in_date, check_out_date, total_price, status, create_time)
+        values (#{userId},#{hotelId},#{roomId},#{checkInDate},#{checkOutDate},#{totalPrice},#{status},#{createTime})
+    </insert>
+
+    <insert id="addTicket" parameterType="com.dousiwei.springbootdayang.pojo.eneity.TicketReservation">
+        insert into dayang_tourism.ticket_reservations (user_id, ticket_id, quantity, total_price, status, create_time)
+        values (#{userId},#{ticketId},#{quantity},#{totalPrice},#{status},#{createTime})
+    </insert>
+
+    <select id="getHotel" resultType="com.dousiwei.springbootdayang.pojo.vo.UserHoVO">
+        select h.name,hro.room_type,hr.check_in_date,hr.check_out_date,hr.total_price,hr.status,hr.create_time
+        from dayang_tourism.hotel_reservations hr,dayang_tourism.hotels h,dayang_tourism.hotel_rooms hro
+                 <where>
+                     <if test="userId != null">
+                         user_id = #{userId}
+                     </if>
+                     and h.hotel_id = hro.hotel_id and hro.room_id = hr.room_id
+                 </where>
+        order by hr.create_time desc
+    </select>
+
+    <select id="getTicket" resultType="com.dousiwei.springbootdayang.pojo.vo.UserTkVO">
+        select t.ticket_name, tr.quantity, tr.total_price, tr.status, tr.create_time from dayang_tourism.tickets t, dayang_tourism.ticket_reservations tr
+                <where>
+                    <if test="userId != null">
+                        user_id = #{userId}
+                    </if>
+                    and t.ticket_id = tr.ticket_id
+                </where>
+        order by create_time desc
+    </select>
+</mapper>

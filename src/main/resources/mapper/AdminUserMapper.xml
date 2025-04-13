@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.dousiwei.springbootdayang.mapper.AdminUserMapper">
+    <select id="page" resultType="com.dousiwei.springbootdayang.pojo.eneity.User">
+        select * from dayang_tourism.users
+        <where>
+            <if test="username != null and username != ''">
+                and username like concat('%',#{username},'%')
+            </if>
+        </where>
+        order by register_date desc
+    </select>
+
+    <update id="update" parameterType="com.dousiwei.springbootdayang.pojo.eneity.User">
+        update dayang_tourism.users
+        <set>
+            <if test="username != null and username != ''">
+                username = #{username},
+            </if>
+            <if test="password != null and password != ''">
+                password = #{password},
+            </if>
+            <if test="email != null and email != ''">
+                email = #{email},
+            </if>
+            <if test="phone != null and phone != ''">
+                phone = #{phone},
+            </if>
+            <if test="registerDate != null and registerDate != ''">
+                register_date = #{registerDate},
+            </if>
+            <if test="status != null and status != ''">
+                status = #{status},
+            </if>
+        </set>
+        where user_id = #{userId}
+    </update>
+
+</mapper>

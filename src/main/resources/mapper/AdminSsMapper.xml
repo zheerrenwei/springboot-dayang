@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.dousiwei.springbootdayang.mapper.AdminSsMapper">
+    <insert id="add" parameterType="com.dousiwei.springbootdayang.pojo.eneity.ScenicSpot">
+        insert into dayang_tourism.scenic_spots(name,description,address,phone,open_time,image,created_time,updated_time)
+        values(#{name},#{description},#{address},#{phone},#{openTime},#{image},#{createdTime},#{updatedTime})
+    </insert>
+
+    <select id="page"  resultType="com.dousiwei.springbootdayang.pojo.eneity.ScenicSpot">
+        select * from dayang_tourism.scenic_spots
+                 <where>
+                    <if test="name != null and name != ''">
+                        and name like concat('%',#{name},'%')
+                    </if>
+                </where>
+                 order by created_time desc
+    </select>
+
+    <update id="update" parameterType="com.dousiwei.springbootdayang.pojo.eneity.ScenicSpot">
+        update dayang_tourism.scenic_spots
+        <set>
+            <if test="name != null and name != ''">
+                name = #{name},
+            </if>
+            <if test="description != null and description != ''">
+                description = #{description},
+            </if>
+            <if test="address != null and address != ''">
+                address = #{address},
+            </if>
+            <if test="phone != null and phone != ''">
+                phone = #{phone},
+            </if>
+            <if test="openTime != null and openTime!= ''">
+                open_time = #{openTime},
+            </if>
+            <if test="image != null and image != ''">
+                image = #{image},
+            </if>
+            <if test="updatedTime != null">
+                updated_time = #{updatedTime},
+            </if>
+        </set>
+        where scenic_id = #{scenicId}
+    </update>
+</mapper>

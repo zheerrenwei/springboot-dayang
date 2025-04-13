@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.dousiwei.springbootdayang.mapper.AdminHoMapper">
+    <insert id="add" parameterType="com.dousiwei.springbootdayang.pojo.eneity.Hotel">
+        insert into dayang_tourism.hotels(name,description,address,phone,stars,image,created_time,updated_time)
+        values(#{name},#{description},#{address},#{phone},#{stars},#{image},#{createdTime},#{updatedTime})
+    </insert>
+
+    <select id="page" resultType="com.dousiwei.springbootdayang.pojo.eneity.Hotel">
+        select * from dayang_tourism.hotels
+                 <where>
+                    <if test="name != null and name != ''">
+                        and name like concat('%',#{name},'%')
+                    </if>
+                 </where>
+                 order by created_time desc
+    </select>
+
+    <update id="update" parameterType="com.dousiwei.springbootdayang.pojo.eneity.Hotel">
+        update dayang_tourism.hotels
+            <set>
+                <if test="name != null and name != ''">
+                    name = #{name},
+                </if>
+                <if test="description != null and description != ''">
+                    description = #{description},
+                </if>
+                <if test="address != null and address != ''">
+                    address = #{address},
+                </if>
+                <if test="phone != null and phone != ''">
+                    phone = #{phone},
+                </if>
+                <if test="stars != null and stars != ''">
+                    stars = #{stars},
+                </if>
+                <if test="image != null and image != ''">
+                    image = #{image},
+                </if>
+                <if test="updatedTime != null">
+                    updated_time = #{updatedTime},
+                </if>
+            </set>
+        where hotel_id = #{hotelId}
+    </update>
+</mapper>

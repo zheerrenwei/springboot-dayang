@@ -1,0 +1,45 @@
+server:
+  port: 8080
+
+spring:
+  profiles:
+    active: dev
+
+  servlet:
+    multipart:
+      enabled: true
+
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/dayang_tourism
+    username: root
+    password: 123456
+  data:
+    redis:
+      host: localhost
+      port: 6379
+      password: 123456
+      database: 10
+
+
+mybatis:
+  #mapper配置文件
+  mapper-locations: classpath:mapper/*.xml
+  type-aliases-package: com.dousiwei.springbootdayang
+  configuration:
+    #开启驼峰命名
+    map-underscore-to-camel-case: true
+
+pagehelper:
+  helperDialect: mysql            # 指定数据库方言为 MySQL
+  reasonable: true                # 合理化页码，页码小于1时自动置为1，超过最大页码时自动置为最后一页
+  supportMethodsArguments: true   # 支持通过方法参数传递分页参数
+  params: count=countSql          # 配置 count 查询参数
+
+
+dayang:
+  alioss:
+    endpoint: oss-cn-beijing.aliyuncs.com
+    access-key-id: LTAI5tE6AhWWBTWNhqfhmqJG
+    access-key-secret: tWOYgdDTqUwpXmLKxtNuZHcKBJpQdl
+    bucket-name: springboot-dayang

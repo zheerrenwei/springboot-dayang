@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.dousiwei.springbootdayang.mapper.AdminSrMapper">
+    <select id="page" resultType="com.dousiwei.springbootdayang.pojo.vo.SrPageVO">
+        select sr.review_id, ss.name,u.username,sr.rating,sr.comment,sr.review_date
+            from dayang_tourism.scenic_reviews sr,dayang_tourism.scenic_spots ss,dayang_tourism.users u
+        <where>
+            <if test="name != null and name != ''">
+                and name like concat('%',#{name},'%')
+            </if>
+            <if test="comment != null and comment != ''">
+                and comment like concat('%',#{comment},'%')
+            </if>
+            and sr.user_id = u.user_id and sr.scenic_id = ss.scenic_id
+        </where>
+        order by review_date desc
+    </select>
+
+</mapper>

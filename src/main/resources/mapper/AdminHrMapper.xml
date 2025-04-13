@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.dousiwei.springbootdayang.mapper.AdminHrMapper">
+    <select id="page" resultType="com.dousiwei.springbootdayang.pojo.vo.HrPageVO">
+        select hr.reservation_id, u.username,ho.name,hroom.room_type,hr.check_in_date,hr.check_out_date,hr.total_price,hr.status,hr.create_time
+        from dayang_tourism.hotel_reservations hr,dayang_tourism.hotels ho,dayang_tourism.users
+        u,dayang_tourism.hotel_rooms hroom
+        <where>
+            <if test="name != null and name != ''">
+                and name like concat('%',#{name},'%')
+            </if>
+            and hr.hotel_id = ho.hotel_id
+            and hr.user_id = u.user_id
+            and hr.room_id = hroom.room_id
+        </where>
+        order by create_time desc
+    </select>
+
+</mapper>
