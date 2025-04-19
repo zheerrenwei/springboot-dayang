@@ -30,7 +30,7 @@
             <if test="registerDate != null and registerDate != ''">
                 register_date = #{registerDate},
             </if>
-            <if test="status != null and status != ''">
+            <if test="status != null">
                 status = #{status},
             </if>
         </set>

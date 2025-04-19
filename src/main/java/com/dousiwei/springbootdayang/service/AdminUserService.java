@@ -15,5 +15,5 @@ public interface AdminUserService {
     // 删除用户
     void delete(int userId);
     // 修改用户状态
-    void updateStatus(Integer status, int userId);
+    void updateStatus(int status, int userId);
 }

@@ -9,6 +9,7 @@ import com.dousiwei.springbootdayang.pojo.eneity.ScenicReview;
 import com.dousiwei.springbootdayang.pojo.eneity.TicketReservation;
 import com.dousiwei.springbootdayang.pojo.vo.UserHoVO;
 import com.dousiwei.springbootdayang.pojo.vo.UserTkVO;
+import com.dousiwei.springbootdayang.service.AdminSsService;
 import com.dousiwei.springbootdayang.service.CommonUService;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,7 +19,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
-public class CommonServiceImpl implements CommonUService {
+public class CommonUServiceImpl implements CommonUService {
     @Autowired
     private CommonUMapper commonUMapper;
     //留言功能

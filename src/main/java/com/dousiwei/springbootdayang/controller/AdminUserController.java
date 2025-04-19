@@ -60,8 +60,8 @@ public class AdminUserController {
     // 修改用户状态
     @PostMapping("/status")
     @Operation(summary = "修改用户状态")
-    public Result status(Integer status, int userId) {
-        log.info("修改用户状态：{}", status);
+    public Result status(int status, int userId) {
+        log.info("修改用户状态：{},{}", status, userId);
         adminUserService.updateStatus(status, userId);
         return Result.success();
     }

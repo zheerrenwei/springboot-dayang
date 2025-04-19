@@ -63,11 +63,12 @@ public class AdminUserServiceImpl implements AdminUserService {
 
     //启用或禁用用户
     @Override
-    public void updateStatus(Integer status, int userId) {
+    public void updateStatus(int status, int userId) {
         User user = User.builder()
                 .userId(userId)
                 .status(status)
                 .build();
+        log.info("{}", user);
         adminUserMapper.update(user);
     }
 }

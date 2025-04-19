@@ -37,6 +37,7 @@ public class CommonUController {
     @Operation(summary = "用户酒店预约功能")
     public Result addHotel(@RequestBody HotelAddDTO hotelAddDTO){
         log.info("用户酒店预约：{}", hotelAddDTO);
+
         commonUService.addHotel(hotelAddDTO);
         return Result.success();
     }

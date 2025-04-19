@@ -7,7 +7,7 @@ import java.io.Serializable;
 @Data
 public class ScenicReviewDTO implements Serializable {
     // 景点id
-    private Integer scenicId;
+    private String name;
     // 用户id
     private Integer userId;
     // 评分

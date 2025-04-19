@@ -12,5 +12,6 @@ public class SsUpdateDTO implements Serializable {
     private String address;
     private String phone;
     private String openTime; // 如 "08:00-18:00"
+    private String link;
     private String image;
 }
